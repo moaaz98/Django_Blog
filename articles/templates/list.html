@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}List{% endblock title %}
+
+{% block content %}
+	<div class="row">
+
+		<br>
+		<form class="input-group mb-3" action="{% url 'article-list' %}">
+		  <input type="text" class="form-control" placeholder="Article title?" name="q" value="{{request.GET.q}}">
+		  <div class="input-group-append">
+		    <button class="btn btn-outline-secondary" type="submit">Search</button>
+		  </div>
+		</form>
+		<br>
+
+		<a href="{% url 'article-create' %}" class="btn btn-block btn-outline-success">Create Article</a>
+		<br>
+<div class="card-deck">
+
+		{% for article in article_objects %}
+			<div class="col-12 col-md-6">
+				<div class="card my-card ">
+					    <img class="card-img-top" src="{{article.pic.url}}" alt="Card image cap">
+
+				  <div class="card-body">
+				    <h5 class="card-title">{{article.title}}</h5>
+				    <p class="card-text">{{article.content}}</p>
+				  </div>
+				  <ul class="list-group list-group-flush">
+				    <li class="list-group-item no-borders">Created on:{{article.created}}</li>
+				    <li class="list-group-item no-borders">Written by:{{article.author}}</li>
+				  </ul>
+				  <div class="card-body">
+				    <a href="{% url 'article-detail' article.id %}" class="btn btn-outline-success">Detail</a>
+				  </div>
+				</div>
+			</div>
+		{% empty %}
+			<h1>No Results...</h1>
+		{% endfor %}
+</div>
+	</div>
+
+
+{% endblock content %}

@@ -1,0 +1,14 @@
+
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="jumbotron text-center my-card">
+	<h3 class="display-4">Signup</h3>
+	<form action="{% url 'signup' %}" method="POST">
+		{% csrf_token %}
+		{{signup_form|crispy}}
+		<input type="submit" value="Signup" class="btn btn-block btn-outline-primary">
+	</form>
+</div>
+{% endblock content %}

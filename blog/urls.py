@@ -16,9 +16,21 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls.static import static
+from django.conf import settings
+from articles import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('articles/', views.article_list, name='article-list'),
+    path('articles/<int:article_id>/', views.article_detail, name='article-detail'),
+    path('articles/create/', views.article_create, name='article-create'),
+    path('articles/<int:article_id>/update/', views.article_update, name='article-update'),
+    path('articles/<int:article_id>/delete/', views.article_delete, name='article-delete'),
+
+    path('signup/', views.signup, name='signup'),
+    path('signin/', views.signin, name='signin'),
+    path('signout/', views.signout, name='signout'),
+
 ]
 
 urlpatterns+=static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
